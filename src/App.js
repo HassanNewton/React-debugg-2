@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserForm from "./components/UserForm";
 import UserList from "./components/UserList";
+import "./App.css";
 
 const App = () => {
   // State för användare
@@ -39,11 +40,27 @@ const App = () => {
     }
   };
 
+  const removeUser = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3001/users/${id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setUsers((prev) => prev.filter((user) => user.id !== id));
+      } else {
+        console.error("Error deleting user:", res.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>User Manager (JSON Server)</h1>
+    <div className="app-container">
+      <h1>User Manager</h1>
       <UserForm onAddUser={addUser} />
-      <UserList users={users} />
+      <UserList users={users} onRemoveUser={removeUser} />
     </div>
   );
 };

@@ -25,18 +25,18 @@ const UserForm = ({ onAddUser }) => {
     <form onSubmit={handleSubmit}>
       <h2>Add User</h2>
       <div>
-        <label>Name:</label>
         <input
           type="text"
           value={name}
+          placeholder="Name:"
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div>
-        <label>Email:</label>
         <input
           type="email"
           value={email}
+          placeholder="Email:"
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
